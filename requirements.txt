@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+jinja2
+python-multipart
+aiosqlite
+pydantic
+passlib[bcrypt]
+pyjwt
+python-dotenv
+httpx

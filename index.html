@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Shop - Elegant Groceries</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background-wrapper">
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>ROYAL</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for premium groceries...">
+            <button onclick="searchProducts()"><i class="fas fa-search">🔍</i></button>
+        </div>
+        <div class="nav-links">
+            <a href="#" onclick="showHome()">Home</a>
+            <a href="#" onclick="showCart()">Cart (<span id="cartCount">0</span>)</a>
+            <a href="#" id="authLink" onclick="showAuth()">Sign In</a>
+            <a href="#" id="adminLink" style="display:none;" onclick="showAdmin()">Admin</a>
+            <a href="#" id="logoutLink" style="display:none;" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="mainContent">
+        <section class="hero" id="heroSection">
+            <div class="hero-content">
+                <h2>Experience Premium Quality</h2>
+                <p>Curated groceries delivered fresh to your doorstep.</p>
+                <button class="cta-btn" onclick="document.getElementById('productsSection').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+            </div>
+        </section>
+
+        <section class="products-grid" id="productsSection">
+            <!-- Products injected by JS -->
+        </section>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <div class="cart-summary">
+                <h3>Subtotal: ₹<span id="cartSubtotal">0</span></h3>
+                <div class="delivery-options">
+                    <label>
+                        <input type="radio" name="deliveryType" value="home" checked onchange="toggleDeliveryFields()"> Home Delivery
+                    </label>
+                    <label>
+                        <input type="radio" name="deliveryType" value="shop" onchange="toggleDeliveryFields()"> Collect from Shop
+                    </label>
+                </div>
+                <div id="homeDeliveryFields">
+                    <input type="text" id="addressInput" placeholder="Enter your full address">
+                    <input type="number" id="distanceInput" placeholder="Distance from shop (in km)">
+                </div>
+                <button class="action-btn" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h2 id="authTitle">Sign In / Sign Up</h2>
+            <div id="authStep1">
+                <input type="text" id="contactInput" placeholder="Email Address">
+                
+                <!-- CAPTCHA -->
+                <div class="captcha-container">
+                    <span id="captchaMath">? + ? = </span>
+                    <input type="number" id="captchaInput" placeholder="Answer">
+                </div>
+
+                <button class="action-btn" onclick="requestOTP()">Send OTP</button>
+            </div>
+            <div id="authStep2" style="display:none;">
+                <p>We've sent an OTP to your email.</p>
+                <input type="text" id="otpInput" placeholder="Enter OTP">
+                <button class="action-btn" onclick="verifyOTP()">Verify & Login</button>
+            </div>
+            <p id="authMessage" class="error-msg"></p>
+        </div>
+    </div>
+
+    <!-- Admin Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content admin-panel">
+            <span class="close" onclick="closeModals()">&times;</span>
+            <h2>Admin Dashboard</h2>
+            <div id="adminProducts"></div>
+        </div>
+    </div>
+
+    <!-- AI Assistant -->
+    <div class="ai-assistant" id="aiAssistant">
+        <div class="ai-header" onclick="toggleAI()">
+            <span>Virtual AI Assistant</span>
+            <span id="aiToggleIcon">^</span>
+        </div>
+        <div class="ai-body" id="aiBody" style="display:none;">
+            <div class="ai-messages" id="aiMessages">
+                <div class="msg ai-msg">Hello! How can I help you today?</div>
+            </div>
+            <div class="ai-input">
+                <input type="text" id="aiInput" placeholder="Ask something...">
+                <button onclick="sendAIMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
